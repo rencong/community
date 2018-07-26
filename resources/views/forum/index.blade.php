@@ -21,7 +21,9 @@
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading">{{$discussion->title}}</h4>
+                            <h4 class="media-heading"><a
+                                        href="{{route('discussion.show',['id'=>$discussion->id])}}">{{$discussion->title}}</a>
+                            </h4>
                             {{$discussion->user->name}}
                         </div>
                     </div>

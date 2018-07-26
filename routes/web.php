@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/', 'PostsController@index');
+Route::get('/', 'PostsController@index')->name('discussion.index');
+Route::get('/{id}', 'PostsController@show')->name('discussion.show');

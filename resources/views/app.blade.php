@@ -43,7 +43,7 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">首页</a></li>
+                    <li class="active"><a href="{{route('discussion.index')}}">首页</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../navbar/">登录</a></li>
