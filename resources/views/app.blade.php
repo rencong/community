@@ -40,8 +40,12 @@
                 <li class="active"><a href="{{route('discussion.index')}}">首页</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="../navbar/">登录</a></li>
-                <li><a href="{{route('user.register')}}">注册</a></li>
+                @if(\Illuminate\Support\Facades\Auth::check())
+                    <li><a href="#">{{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
+                @else
+                    <li><a href="{{ route('user.login') }}">登录</a></li>
+                    <li><a href="{{route('user.register')}}">注册</a></li>
+                @endif
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -53,6 +57,11 @@
             {{ $error }}
         </div>
     @endforeach
+@endif
+@if(\Illuminate\Support\Facades\Session::has('login_error'))
+    <div class="alert alert-danger">
+        {{ \Illuminate\Support\Facades\Session::get('login_error') }}
+    </div>
 @endif
 @yield('content')
 {{--</div>--}}

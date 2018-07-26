@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Model\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -34,6 +36,31 @@ class UserController extends Controller
         $this->sendTo($view, $subject, $user, $data);
 
         return redirect('/');
+    }
+
+    public function login()
+    {
+        return view('user.login');
+    }
+
+    public function signin(Request $request)
+    {
+        $this->validate($request, [
+            'email'    => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        if(Auth::attempt([
+            'email'=>$request->input('email'),
+            'password'=>$request->input('password'),
+            'is_confirmed'=>1
+        ])){
+            return redirect('/');
+        }
+
+        Session::flush('login_error','密码错误或邮箱没验证');
+        return redirect('/user/login')->withInput();
+
     }
 
     /**
