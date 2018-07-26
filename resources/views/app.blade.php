@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -22,37 +22,37 @@
 </head>
 <body>
 {{--<div class="container">--}}
-    @if (isset($errors) && $errors->any())
-        @foreach ($errors->all() as $error)
-            <div class="alert alert-danger">
-                {{ $error }}
-            </div>
-        @endforeach
-    @endif
-    <nav class="navbar navbar-default navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                 <a class="navbar-brand" href="#">Ren Cong</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{route('discussion.index')}}">首页</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../navbar/">登录</a></li>
-                    <li><a href="../navbar-fixed-top/">注册</a></li>
-                </ul>
-            </div><!--/.nav-collapse -->
+@if (isset($errors) && $errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+            {{ $error }}
         </div>
-    </nav>
-    @yield('content')
+    @endforeach
+@endif
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Ren Cong</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="{{route('discussion.index')}}">首页</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="../navbar/">登录</a></li>
+                <li><a href="{{route('user.register')}}">注册</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+@yield('content')
 {{--</div>--}}
 @yield('footer')
 </body>
