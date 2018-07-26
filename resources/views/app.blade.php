@@ -22,13 +22,7 @@
 </head>
 <body>
 {{--<div class="container">--}}
-@if (isset($errors) && $errors->any())
-    @foreach ($errors->all() as $error)
-        <div class="alert alert-danger">
-            {{ $error }}
-        </div>
-    @endforeach
-@endif
+
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <div class="navbar-header">
@@ -52,6 +46,14 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
+
+@if (isset($errors) && $errors->any())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger">
+            {{ $error }}
+        </div>
+    @endforeach
+@endif
 @yield('content')
 {{--</div>--}}
 @yield('footer')
