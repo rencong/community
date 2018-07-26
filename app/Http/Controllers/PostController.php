@@ -10,9 +10,9 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth',['only'=>['create','store','edit','update']]);
+        $this->middleware('auth', ['only' => ['create', 'store', 'edit', 'update']]);
     }
-    
+
     //
     public function index()
     {
@@ -44,6 +44,35 @@ class PostController extends Controller
             'last_user_id' => Auth::user()->id
         ];
         $discussion = Discussion::create(array_merge($request->all(), $data));
+
+        //action是重定向到控制器方法
+        return redirect()->action('PostController@show', ['id' => $discussion->id]);
+    }
+
+    public function edit($id)
+    {
+        $discussion = Discussion::findOrFail($id);
+        if(Auth::user()->id !== $discussion->user_id ){
+            return redirect('/');
+        }
+
+        return view('forum.edit', compact('discussion'));
+    }
+
+    public function update(Request $request)
+    {
+        $this->validate($request, [
+                'title' => 'required',
+                'body'  => 'required',
+                'id'=>'required'
+            ]
+        );
+        $discussion = Discussion::findOrFail($request->input('id'));
+
+        $data = [
+            'last_user_id' => Auth::user()->id
+        ];
+        $discussion->update(array_merge($request->all(), $data));
 
         //action是重定向到控制器方法
         return redirect()->action('PostController@show', ['id' => $discussion->id]);

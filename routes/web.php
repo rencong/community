@@ -13,7 +13,9 @@
 
 Route::get('/', 'PostController@index')->name('discussion.index');
 Route::get('/discussion/create', 'PostController@create')->name('discussion.create');
+Route::get('/discussion/edit/{id}', 'PostController@edit')->name('discussion.edit');
 Route::post('/discussion/create', 'PostController@store')->name('discussion.store');
+Route::post('/discussion/update', 'PostController@update')->name('discussion.update');
 Route::get('/discussion/{id}', 'PostController@show')->name('discussion.show');
 
 Route::get('/user/register', 'UserController@register')->name('user.register');

@@ -14,8 +14,11 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">{{$discussion->title}}
-                        <a class="btn btn-lg btn-primary pull-right" href="../../components/#navbar"
-                           role="button">修改帖子</a>
+                        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id==$discussion->user_id)
+                            <a class="btn btn-lg btn-primary pull-right"
+                               href="{{route('discussion.edit',['id'=>$discussion->id])}}"
+                               role="button">修改帖子</a>
+                        @endif
                     </h4>
                     {{$discussion->user->name}}
                 </div>
