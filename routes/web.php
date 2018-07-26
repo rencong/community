@@ -15,4 +15,5 @@ Route::get('/', 'PostsController@index')->name('discussion.index');
 Route::get('/{id}', 'PostsController@show')->name('discussion.show');
 
 Route::get('/user/register', 'UserController@register')->name('user.register');
+Route::get('/verify/{confirm_code}', 'UserController@confirmEmail')->name('verify.email');
 Route::post('/user/register', 'UserController@store')->name('user.register.post');
