@@ -18,6 +18,10 @@ class Discussion extends Model
         'last_user_id'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
 }

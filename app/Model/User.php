@@ -2,8 +2,8 @@
 
 namespace App\Model;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -15,7 +15,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','avatar',
+        'name',
+        'email',
+        'password',
+        'avatar',
     ];
 
     /**
@@ -24,6 +27,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
+
+    public function discussions()
+    {
+        return $this->hasMany(Discussion::class);
+    }
 }
