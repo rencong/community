@@ -63,6 +63,12 @@ class UserController extends Controller
 
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
     /**
      * 验证邮件
      * @param $confirm_code

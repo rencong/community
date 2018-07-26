@@ -11,11 +11,14 @@
 |
 */
 
-Route::get('/', 'PostsController@index')->name('discussion.index');
-Route::get('/discussion/{id}', 'PostsController@show')->name('discussion.show');
+Route::get('/', 'PostController@index')->name('discussion.index');
+Route::get('/discussion/create', 'PostController@create')->name('discussion.create');
+Route::post('/discussion/create', 'PostController@store')->name('discussion.store');
+Route::get('/discussion/{id}', 'PostController@show')->name('discussion.show');
 
 Route::get('/user/register', 'UserController@register')->name('user.register');
-Route::get('/user/login', 'UserController@login')->name('user.login');
+Route::get('/user/login', 'UserController@login')->name('login');
+Route::get('/logout', 'UserController@logout')->name('user.logout');
 Route::get('/verify/{confirm_code}', 'UserController@confirmEmail')->name('verify.email');
 Route::post('/user/register', 'UserController@store')->name('user.register.post');
 Route::post('/user/login', 'UserController@signin')->name('user.login.post');

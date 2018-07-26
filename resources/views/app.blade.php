@@ -42,8 +42,10 @@
             <ul class="nav navbar-nav navbar-right">
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <li><a href="#">{{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
+                    <li><a href="{{ route('user.logout') }}">退出</a></li>
+
                 @else
-                    <li><a href="{{ route('user.login') }}">登录</a></li>
+                    <li><a href="{{ route('login') }}">登录</a></li>
                     <li><a href="{{route('user.register')}}">注册</a></li>
                 @endif
             </ul>
