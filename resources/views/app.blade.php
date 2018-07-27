@@ -9,16 +9,16 @@
 
     <!-- Fonts -->
     {{--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
-    {{--<link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">--}}
     {{--<script src="/libs/js/jquery-3.2.1.min.js"></script>--}}
     {{--<script src="/libs/js/icheck.min.js"></script>--}}
     {{--<script src="/libs/js/moment-with-locales.min.js"></script>--}}
     {{--<script src="/libs/js/anchor-ui.min.js"></script>--}}
-    {{--<script src="/libs/js/notify.min.js"></script>--}}
-    {{--<script src="/libs/js/jquery.cookie.min.js"></script>--}}
+
     {{--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>--}}
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
 {{--<div class="container">--}}
@@ -41,9 +41,20 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 @if(\Illuminate\Support\Facades\Auth::check())
-                    <li><a href="#">{{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
-                    <li><a href="{{ route('user.logout') }}">退出</a></li>
-
+                    <li>
+                        <a id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"
+                           class="dropdown-toggle">
+                            {{\Illuminate\Support\Facades\Auth::user()->name}}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dLabel">
+                            <li><a href="#"><i class="fa fa-cog"></i> 更换密码</a></li>
+                            <li><a href="#"><i class="fa fa-user"></i> 更换头像</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ route('user.logout') }}"><i class="fa fa-sign-out"></i> 退出</a></li>
+                        </ul>
+                    </li>
+                    <li><img src="{{\Illuminate\Support\Facades\Auth::user()->avatar}}" class="img-circle" width="50">
+                    </li>
                 @else
                     <li><a href="{{ route('login') }}">登录</a></li>
                     <li><a href="{{route('user.register')}}">注册</a></li>
@@ -68,5 +79,7 @@
 @yield('content')
 {{--</div>--}}
 @yield('footer')
+<script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
