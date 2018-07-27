@@ -33,3 +33,13 @@ $factory->define(App\Model\Discussion::class, function (Faker $faker) {
         'last_user_id' => $faker->randomElement($user_ids),
     ];
 });
+
+$factory->define(App\Model\Comment::class, function (Faker $faker) {
+    $user_ids = \App\Model\User::all()->pluck('id')->toArray();
+    $discussion_ids = \App\Model\Discussion::all()->pluck('id')->toArray();
+    return [
+        'body'         => $faker->paragraph,
+        'user_id'      => $faker->randomElement($user_ids),
+        'discussion_id' => $faker->randomElement($discussion_ids),
+    ];
+});

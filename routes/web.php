@@ -18,6 +18,8 @@ Route::post('/discussion/create', 'PostController@store')->name('discussion.stor
 Route::post('/discussion/update', 'PostController@update')->name('discussion.update');
 Route::get('/discussion/{id}', 'PostController@show')->name('discussion.show');
 
+Route::get('/comment/create', 'CommentController@create')->name('comment.create');
+
 Route::get('/user/register', 'UserController@register')->name('user.register');
 Route::get('/user/login', 'UserController@login')->name('login');
 Route::get('/logout', 'UserController@logout')->name('user.logout');
