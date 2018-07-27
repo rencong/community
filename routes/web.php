@@ -22,6 +22,8 @@ Route::get('/comment/create', 'CommentController@create')->name('comment.create'
 
 Route::get('/user/register', 'UserController@register')->name('user.register');
 Route::get('/user/login', 'UserController@login')->name('login');
+Route::get('/user/avatar', 'UserController@avatar')->name('user.avatar');
+Route::post('/user/avatar', 'UserController@changeAvatar')->name('user.change.avatar');
 Route::get('/logout', 'UserController@logout')->name('user.logout');
 Route::get('/verify/{confirm_code}', 'UserController@confirmEmail')->name('verify.email');
 Route::post('/user/register', 'UserController@store')->name('user.register.post');

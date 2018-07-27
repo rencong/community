@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
 {
@@ -50,15 +51,15 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        if(Auth::attempt([
-            'email'=>$request->input('email'),
-            'password'=>$request->input('password'),
-            'is_confirmed'=>1
-        ])){
+        if (Auth::attempt([
+            'email'        => $request->input('email'),
+            'password'     => $request->input('password'),
+            'is_confirmed' => 1
+        ])) {
             return redirect('/');
         }
 
-        Session::flush('login_error','密码错误或邮箱没验证');
+        Session::flush('login_error', '密码错误或邮箱没验证');
         return redirect('/user/login')->withInput();
 
     }
@@ -100,5 +101,26 @@ class UserController extends Controller
         Mail::send($view, $data, function ($message) use ($user, $subject) {
             $message->to($user->email)->subject($subject);
         });
+    }
+
+    public function avatar()
+    {
+        return view('user.avatar');
+    }
+
+    public function changeAvatar(Request $request)
+    {
+        $file = $request->file('avatar');
+        $destinationPath = 'uploads/';
+        $filename = Auth::user()->id . '_' . time() . $file->getClientOriginalName();
+        $file->move($destinationPath, $filename);
+
+        //压缩图片
+        Image::make($destinationPath.$filename)->fit(200)->save();
+
+        $user = User::find(Auth::user()->id);
+        $user->avatar = '/'.$destinationPath . $filename;
+        $user->save();
+        return redirect('user/avatar');
     }
 }

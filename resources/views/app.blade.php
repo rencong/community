@@ -8,16 +8,12 @@
     <title>Laravel</title>
 
     <!-- Fonts -->
-    {{--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
-    {{--<script src="/libs/js/jquery-3.2.1.min.js"></script>--}}
-    {{--<script src="/libs/js/icheck.min.js"></script>--}}
-    {{--<script src="/libs/js/moment-with-locales.min.js"></script>--}}
-    {{--<script src="/libs/js/anchor-ui.min.js"></script>--}}
-
-    {{--<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>--}}
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="/libs/js/jquery-3.2.1.min.js"></script>
+    <script src="//cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="/libs/js/jquery.form.js"></script>
 
 </head>
 <body>
@@ -48,7 +44,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="dLabel">
                             <li><a href="#"><i class="fa fa-cog"></i> 更换密码</a></li>
-                            <li><a href="#"><i class="fa fa-user"></i> 更换头像</a></li>
+                            <li><a href="{{route('user.avatar')}}"><i class="fa fa-user"></i> 更换头像</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ route('user.logout') }}"><i class="fa fa-sign-out"></i> 退出</a></li>
                         </ul>
@@ -79,7 +75,7 @@
 @yield('content')
 {{--</div>--}}
 @yield('footer')
-<script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="//cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+{{--<script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>--}}
+{{--<script src="//cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>--}}
 </body>
 </html>
