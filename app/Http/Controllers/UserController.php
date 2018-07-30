@@ -6,7 +6,9 @@ use App\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class UserController extends Controller
@@ -111,16 +113,32 @@ class UserController extends Controller
     public function changeAvatar(Request $request)
     {
         $file = $request->file('avatar');
+
+        $input = array('image' => $file);
+        $rules = array('image' => 'image');
+        $validator = Validator::make($input, $rules);
+        if ($validator->fails()) {
+            return Response::json([
+                'success' => false,
+                'errors'  => $validator->getMessageBag()->toArray()
+            ]);
+        }
         $destinationPath = 'uploads/';
         $filename = Auth::user()->id . '_' . time() . $file->getClientOriginalName();
         $file->move($destinationPath, $filename);
 
         //压缩图片
-        Image::make($destinationPath.$filename)->fit(200)->save();
+        Image::make($destinationPath . $filename)->fit(200)->save();
 
         $user = User::find(Auth::user()->id);
-        $user->avatar = '/'.$destinationPath . $filename;
+        $user->avatar = '/' . $destinationPath . $filename;
         $user->save();
+
+        return Response::json([
+            'success' => true,
+            'avatar'  => asset($destinationPath . $filename)
+        ]);
+
         return redirect('user/avatar');
     }
 }
