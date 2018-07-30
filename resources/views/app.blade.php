@@ -11,8 +11,11 @@
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/libs/css/jquery.Jcrop.css">
+
     <script src="/libs/js/jquery-3.2.1.min.js"></script>
-    <script src="//cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="/libs/js/jquery.Jcrop.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/libs/js/jquery.form.js"></script>
 
 </head>

@@ -23,7 +23,8 @@ Route::get('/comment/create', 'CommentController@create')->name('comment.create'
 Route::get('/user/register', 'UserController@register')->name('user.register');
 Route::get('/user/login', 'UserController@login')->name('login');
 Route::get('/user/avatar', 'UserController@avatar')->name('user.avatar');
-Route::post('/user/avatar', 'UserController@changeAvatar')->name('user.change.avatar');
+Route::post('/crop/avatar', 'UserController@cropAvatar')->name('crop.avatar');//裁剪头像
+Route::post('/user/avatar', 'UserController@changeAvatar')->name('user.change.avatar');//更新头像
 Route::get('/logout', 'UserController@logout')->name('user.logout');
 Route::get('/verify/{confirm_code}', 'UserController@confirmEmail')->name('verify.email');
 Route::post('/user/register', 'UserController@store')->name('user.register.post');
