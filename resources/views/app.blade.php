@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta id="token" name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
 
     <!-- Fonts -->
@@ -17,7 +17,8 @@
     <script src="/libs/js/jquery.Jcrop.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/libs/js/jquery.form.js"></script>
-
+    <script src="/libs/js/vue.min.js"></script>
+    <script src="/libs/js/vue-resource.min.js"></script>
 </head>
 <body>
 {{--<div class="container">--}}

@@ -18,6 +18,7 @@ class CommentController extends Controller
         ]);
 
         Comment::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
-        return redirect()->action('PostController@show', ['id' => $request->input('discussion_id')]);
+        return [];
+//        return redirect()->action('PostController@show', ['id' => $request->input('discussion_id')]);
     }
 }

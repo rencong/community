@@ -26,10 +26,9 @@
         </div>
 
         <div class="row">
-            <div class="col-md-9" role="main">
+            <div class="col-md-9" role="main" id="post">
                 <div class="blog-post">
                     {!!$discussion->body!!}
-
                     {{--                    {{$discussion->body}}--}}
                 </div>
                 <hr>
@@ -48,14 +47,26 @@
                         </div>
                     </div>
                 @endforeach
+                <div class="media" v-for="comment in comments">
+                    <div class="media-left">
+                        <a href="#">
+                            <img v-bind:src="comment.avatar" class="media-object img-circle" alt="64x64"
+                                 style="width: 32px;height: 32px">
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">@{{comment.name}}</h4>
+                        @{{comment.body}}
+                    </div>
+                </div>
                 <hr>
                 @if(\Illuminate\Support\Facades\Auth::check())
                     <form method="post" action="{{route('comment.store',['discussion_id'=>$discussion->id])}}"
-                          accept-charset="UTF-8">
+                          accept-charset="UTF-8" @submit="onSubmitForm">
                         {!! csrf_field() !!}
 
                         <div class="form-group">
-                            <textarea class="form-control" name="body"></textarea>
+                            <textarea class="form-control" name="body" v-model="newComment.body"></textarea>
                         </div>
 
                         <button type="submit" class="btn btn-success form-control pull-right">发表评论</button>
@@ -66,4 +77,45 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('footer')
+    <script>
+        Vue.http.headers.common['X-CSRF-TOKEN'] = document.querySelector('#token').getAttribute('content');
+        new Vue({
+            el: '#post',
+            data: {
+                comments: [],
+                newComment: {
+                    name: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
+                    avatar: '{{\Illuminate\Support\Facades\Auth::user()->avatar}}',
+                    body: ''
+                },
+                newPost: {
+                    discussion_id: '{{$discussion->id}}',
+                    user_id: '{{\Illuminate\Support\Facades\Auth::user()->id}}',
+                    body: ''
+                }
+            },
+            methods: {
+                onSubmitForm: function (e) {
+                    e.preventDefault();
+                    var that = this;
+                    var comment = this.newComment;
+                    var post = this.newPost;
+                    post.body = comment.body;
+                    this.$http.post('/comment/create', post).then(response => {
+                        that.comments.push(comment);
+                    });
+                    this.newComment = {
+                        name: '{{\Illuminate\Support\Facades\Auth::user()->name}}',
+                        avatar: '{{\Illuminate\Support\Facades\Auth::user()->avatar}}',
+                        body: ''
+                    };
+
+                }
+            }
+        })
+    </script>
+
 @endsection
