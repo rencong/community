@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Discussion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use YuanChao\Editor\EndaEditor;
 
 class PostController extends Controller
 {
@@ -23,6 +24,8 @@ class PostController extends Controller
     public function show($id)
     {
         $discussion = Discussion::findOrFail($id);
+        $discussion->body = EndaEditor::MarkDecode($discussion->body);
+
         return view('forum.show', compact('discussion'));
     }
 
@@ -52,7 +55,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $discussion = Discussion::findOrFail($id);
-        if(Auth::user()->id !== $discussion->user_id ){
+        if (Auth::user()->id !== $discussion->user_id) {
             return redirect('/');
         }
 
@@ -64,7 +67,7 @@ class PostController extends Controller
         $this->validate($request, [
                 'title' => 'required',
                 'body'  => 'required',
-                'id'=>'required'
+                'id'    => 'required'
             ]
         );
         $discussion = Discussion::findOrFail($request->input('id'));
@@ -76,5 +79,16 @@ class PostController extends Controller
 
         //action是重定向到控制器方法
         return redirect()->action('PostController@show', ['id' => $discussion->id]);
+    }
+
+    /**
+     * markdown编辑器
+     * @return string
+     */
+    public function upload()
+    {
+        $data = EndaEditor::uploadImgFile('uploads');
+
+        return json_encode($data);
     }
 }

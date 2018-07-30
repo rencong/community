@@ -19,6 +19,7 @@ Route::post('/discussion/update', 'PostController@update')->name('discussion.upd
 Route::get('/discussion/{id}', 'PostController@show')->name('discussion.show');
 
 Route::get('/comment/create', 'CommentController@create')->name('comment.create');
+Route::post('/comment/create', 'CommentController@store')->name('comment.store');
 
 Route::get('/user/register', 'UserController@register')->name('user.register');
 Route::get('/user/login', 'UserController@login')->name('login');
@@ -29,3 +30,4 @@ Route::get('/logout', 'UserController@logout')->name('user.logout');
 Route::get('/verify/{confirm_code}', 'UserController@confirmEmail')->name('verify.email');
 Route::post('/user/register', 'UserController@store')->name('user.register.post');
 Route::post('/user/login', 'UserController@signin')->name('user.login.post');
+Route::post('/post/upload', 'PostController@upload')->name('post.upload');

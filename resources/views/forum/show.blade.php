@@ -16,7 +16,7 @@
                     <h4 class="media-heading">{{$discussion->title}}
                         @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id==$discussion->user_id)
                             <a class="btn btn-lg btn-primary pull-right"
-                               href="{{route('di scussion.edit',['id'=>$discussion->id])}}"
+                               href="{{route('discussion.edit',['id'=>$discussion->id])}}"
                                role="button">修改帖子</a>
                         @endif
                     </h4>
@@ -28,7 +28,9 @@
         <div class="row">
             <div class="col-md-9" role="main">
                 <div class="blog-post">
-                    {{$discussion->body}}
+                    {!!$discussion->body!!}
+
+                    {{--                    {{$discussion->body}}--}}
                 </div>
                 <hr>
                 @foreach($discussion->comments as $comment)
@@ -58,7 +60,7 @@
 
                         <button type="submit" class="btn btn-success form-control pull-right">发表评论</button>
                     </form>
-                    @else
+                @else
                     <a href="{{route('login')}}" class="btn btn-block btn-success">登录参与评论</a>
                 @endif
             </div>
