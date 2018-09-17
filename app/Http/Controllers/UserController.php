@@ -124,7 +124,7 @@ class UserController extends Controller
             ]);
         }
         $destinationPath = 'uploads/';
-        $filename = Auth::user()->id . '_' . time() . $file->getClientOriginalName();
+        $filename = Auth::id() . '_' . time() . $file->getClientOriginalName();
         $file->move($destinationPath, $filename);
 
         //压缩图片
@@ -153,7 +153,7 @@ class UserController extends Controller
         Image::make($photo)->crop($width, $height, $xAlign,
             $yAlign)->save();
 
-        $user = User::find(Auth::user()->id);
+        $user = User::find(Auth::id());
         $user->avatar = asset($photo);
         $user->save();
 

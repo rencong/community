@@ -17,7 +17,7 @@ class CommentController extends Controller
             'discussion_id' => 'required'
         ]);
 
-        Comment::create(array_merge($request->all(), ['user_id' => Auth::user()->id]));
+        Comment::create(array_merge($request->all(), ['user_id' => Auth::id()]));
         return [];
 //        return redirect()->action('PostController@show', ['id' => $request->input('discussion_id')]);
     }

@@ -43,8 +43,8 @@ class PostController extends Controller
         );
 
         $data = [
-            'user_id'      => Auth::user()->id,
-            'last_user_id' => Auth::user()->id
+            'user_id'      => Auth::id(),
+            'last_user_id' => Auth::id()
         ];
         $discussion = Discussion::create(array_merge($request->all(), $data));
 
@@ -55,7 +55,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $discussion = Discussion::findOrFail($id);
-        if (Auth::user()->id !== $discussion->user_id) {
+        if (Auth::id() !== $discussion->user_id) {
             return redirect('/');
         }
 
@@ -73,7 +73,7 @@ class PostController extends Controller
         $discussion = Discussion::findOrFail($request->input('id'));
 
         $data = [
-            'last_user_id' => Auth::user()->id
+            'last_user_id' => Auth::id()
         ];
         $discussion->update(array_merge($request->all(), $data));
 

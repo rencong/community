@@ -14,7 +14,7 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">{{$discussion->title}}
-                        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::user()->id==$discussion->user_id)
+                        @if(\Illuminate\Support\Facades\Auth::check() && \Illuminate\Support\Facades\Auth::id()==$discussion->user_id)
                             <a class="btn btn-lg btn-primary pull-right"
                                href="{{route('discussion.edit',['id'=>$discussion->id])}}"
                                role="button">修改帖子</a>
@@ -93,7 +93,7 @@
                 },
                 newPost: {
                     discussion_id: '{{$discussion->id}}',
-                    user_id: '{{\Illuminate\Support\Facades\Auth::user()->id}}',
+                    user_id: '{{\Illuminate\Support\Facades\Auth::id()}}',
                     body: ''
                 }
             },
